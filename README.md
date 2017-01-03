@@ -1,8 +1,6 @@
-# Tunnel Tool
+# ![alt text][logo] Tunnel Tool
 
-<img src="https://github.com/DaHu4wA/tunneltool/raw/master/src/main/resources/appicon.png" alt="Drawing" style="width:50px;"/>
-
-TunnelTool is a small tool helping to access remote servers
+Tunnel Tool is a small tool helping to access remote servers
 
   - Open SSH Tunnels to various servers
   - Download Logfiles
@@ -31,6 +29,8 @@ ___
    
    App icon made by [Freepik] from [Flaticon]
 
+
+[logo]: https://raw.githubusercontent.com/DaHu4wA/tunneltool/master/src/main/resources/appicon48.png "TunnelTool Logo"
 
 [PuTTY License]: <http://www.chiark.greenend.org.uk/~sgtatham/putty/licence.html>
 [WinSCP License]: <https://winscp.net/eng/docs/license>
