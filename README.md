@@ -1,4 +1,4 @@
-# ![alt text][logo] Tunnel Tool
+# ![][logo] Tunnel Tool
 
 Tunnel Tool is a small tool helping to access remote servers
 
@@ -13,12 +13,16 @@ Checkout the project and use
 $ mvn package
 ```
 
-## ApplicationSettings
- - Todo
- - Todo
-- Todo
-
-
+## Script Settings
+Todo describe
+### Database Tunnel Scripts
+ Todo describe
+ 
+### SCP Tunnel Scripts
+ Todo describe
+ 
+### Misc Settings
+Todo describe
 
 
 ___
