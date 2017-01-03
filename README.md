@@ -1,4 +1,4 @@
-# TunnelTool
+# Tunnel Tool
 TunnelTool is a small tool helping to access remote servers
 
   - Open SSH Tunnels to various servers
