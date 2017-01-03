@@ -1,5 +1,5 @@
 # TunnelTool
-TunnelTool is a small tool helping at accessing servers
+TunnelTool is a small tool helping to access remote servers
 
   - Open SSH Tunnels to various servers
   - Download Logfiles
