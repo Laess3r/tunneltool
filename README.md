@@ -1,6 +1,6 @@
 # Tunnel Tool
 
-![](https://github.com/DaHu4wA/tunneltool/raw/master/src/main/resources/appicon.png=64x64)
+<img src="https://github.com/DaHu4wA/tunneltool/raw/master/src/main/resources/appicon.png" alt="Drawing" style="width: 200px;"/>
 
 TunnelTool is a small tool helping to access remote servers
 
