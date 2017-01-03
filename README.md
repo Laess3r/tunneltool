@@ -23,9 +23,7 @@ $ mvn package
 ___
 ##### Licenses
    This software contains plink.exe ([PuTTY License]) and winscp.exe ([WinSCP License]). 
-   
    All rights of these applications belong to their creators. 
-   
    They are not covered by the license used by TunnelTool.
    
    App icon made by [Freepik] from [Flaticon]
