@@ -3,6 +3,7 @@ package at.stefan_huber.tunneltool.ui.views;
 import at.stefan_huber.tunneltool.ui.Main;
 import at.stefan_huber.tunneltool.ui.config.PropertiesHandler;
 import at.stefan_huber.tunneltool.ui.tools.DatabaseOpener;
+import at.stefan_huber.tunneltool.ui.tools.ScpOpener;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class MainController {
     private PropertiesHandler props;
 
     public ChoiceBox databaseChoiceBox;
+    public ChoiceBox scpChoiceBox;
     public Label statusMsg;
 
     @SuppressWarnings("unchecked")
@@ -40,6 +42,10 @@ public class MainController {
         }
 
         databaseChoiceBox.setItems(FXCollections.observableArrayList(props.getDatabases()));
+        scpChoiceBox.setItems(FXCollections.observableArrayList(props.getScpScripts()));
+
+        databaseChoiceBox.getSelectionModel().selectFirst();
+        scpChoiceBox.getSelectionModel().selectFirst();
     }
 
     public void exit(ActionEvent actionEvent) {
@@ -49,14 +55,27 @@ public class MainController {
     public void openDatabase(ActionEvent actionEvent) {
         try {
             DialogManager.showInfoAndBlock("Windows will pop up!", "Some windows will pop up now!\n Leave them open as long as you need the connection.");
-            DatabaseOpener.openDatabase(databaseChoiceBox.getSelectionModel().getSelectedItem(), new Consumer<String>() {
-                @Override
-                public void accept(String s) {
-                    statusMsg.setText(s);
+            DatabaseOpener.doOpenDatabase(databaseChoiceBox.getSelectionModel().getSelectedItem(), s -> {
+                statusMsg.setText(s);
 
-                    if (s != null && !s.trim().isEmpty()) {
-                        DialogManager.showErrorAndBlock("Error running script", s);
-                    }
+                if (s != null && !s.trim().isEmpty()) {
+                    DialogManager.showErrorAndBlock("Error running database script", s);
+                }
+            });
+        }
+        catch (Exception e) {
+            DialogManager.showError(e);
+        }
+    }
+
+    public void openScpScript(ActionEvent actionEvent) {
+        try {
+            DialogManager.showInfoAndBlock("Windows will pop up!", "Some windows will pop up now!\n Leave them open as long as you need the files.");
+            ScpOpener.doOpenScpScript(scpChoiceBox.getSelectionModel().getSelectedItem(), (Consumer<String>) s -> {
+                statusMsg.setText(s);
+
+                if (s != null && !s.trim().isEmpty()) {
+                    DialogManager.showErrorAndBlock("Error running scp script", s);
                 }
             });
         }

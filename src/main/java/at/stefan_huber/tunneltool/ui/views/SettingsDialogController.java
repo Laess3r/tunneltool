@@ -23,23 +23,38 @@ public class SettingsDialogController {
     private Stage dialogStage;
 
     public TextField sqlDevPath;
+
     public TextField dbNameField;
     public TextArea dbScriptField;
     public ListView databaseSettingsList;
 
+    public TextField scpNameField;
+    public TextArea scpScriptField;
+    public ListView scpSettingsList;
+
     @FXML
     public void initialize() {
         databaseSettingsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        scpSettingsList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+        addSelectionListeners();
 
         try {
             props = PropertiesHandler.getInstance();
             databaseSettingsList.setItems(FXCollections.observableArrayList(props.getDatabases()));
+            scpSettingsList.setItems(FXCollections.observableArrayList(props.getScpScripts()));
             sqlDevPath.setText(props.getSqlDeveloperPath());
+
+            databaseSettingsList.getSelectionModel().selectFirst();
+            scpSettingsList.getSelectionModel().selectFirst();
+
         }
         catch (IOException e) {
             // do nothing
         }
+    }
 
+    private void addSelectionListeners() {
         databaseSettingsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -57,6 +72,22 @@ public class SettingsDialogController {
             }
         });
 
+        scpSettingsList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                scpNameField.setEditable(false);
+                if (oldValue != null) {
+                    updateScpEntry(null);
+                }
+
+                if (newValue == null) {
+                    return;
+                }
+
+                scpNameField.setText(newValue);
+                scpScriptField.setText(props.getScpScript(newValue));
+            }
+        });
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -100,10 +131,48 @@ public class SettingsDialogController {
         props.getDataBasesMap().remove(selectedItem.toString());
     }
 
+    public void updateScpEntry(ActionEvent actionEvent) {
+        String name = scpNameField.getText();
+        if (name == null || name.trim().isEmpty()) {
+            return;
+        }
+
+        String scpScript = scpScriptField.getText();
+
+        boolean existed = props.getScpScriptsMap().containsKey(name);
+        props.getScpScriptsMap().put(name, scpScript);
+
+        if (!existed) {
+            scpSettingsList.getItems().add(name);
+            scpSettingsList.getSelectionModel().selectLast();
+        }
+    }
+
+    public void addScpEntry(ActionEvent actionEvent) {
+        updateScpEntry(null);
+        scpNameField.setText(null);
+        scpScriptField.setText(null);
+        scpSettingsList.getSelectionModel().clearSelection();
+        scpNameField.setEditable(true);
+    }
+
+    public void removeScpEntry(ActionEvent actionEvent) {
+        Object selectedItem = scpSettingsList.getSelectionModel().getSelectedItem();
+        if (selectedItem == null) {
+            return;
+        }
+
+        int selectedIndex = scpSettingsList.getSelectionModel().getSelectedIndex();
+        scpSettingsList.getItems().remove(selectedIndex);
+
+        props.getScpScriptsMap().remove(selectedItem.toString());
+    }
+
     public void saveSettings(ActionEvent actionEvent) {
         props.setSqlDeveloperPath(sqlDevPath.getText());
 
         updateDbEntry(null);
+        updateScpEntry(null);
 
         try {
             props.writePropertyFile();

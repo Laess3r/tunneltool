@@ -16,7 +16,7 @@ public class MapHelper {
     }
 
     public static Map<String, String> parseMap(String formattedMap) {
-        if (formattedMap == null) {
+        if (formattedMap == null || formattedMap.trim().isEmpty()) {
             return new HashMap<>();
         }
 

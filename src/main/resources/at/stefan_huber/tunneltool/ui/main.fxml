@@ -12,16 +12,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-
-<BorderPane prefHeight="210.0" prefWidth="324.0" stylesheets="/at/stefan_huber/tunneltool/ui/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.stefan_huber.tunneltool.ui.views.MainController">
+<BorderPane prefHeight="210.0" prefWidth="324.0" stylesheets="/at/stefan_huber/tunneltool/ui/main.css" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="at.stefan_huber.tunneltool.ui.views.MainController">
 
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <Menu mnemonicParsing="false" text="File">
-                <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
-            </Menu>
-            <Menu mnemonicParsing="false" text="Settings">
-                <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Change Settings" />
+                <MenuItem mnemonicParsing="false" onAction="#openSettings" text="Settings"/>
+                <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit"/>
             </Menu>
         </MenuBar>
     </top>
@@ -29,33 +27,43 @@
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <Tab text="Open Database">
                 <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <center>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label text="Select Database:" textFill="WHITE" />
-                               <ChoiceBox fx:id="databaseChoiceBox" prefHeight="25.0" prefWidth="241.0">
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                        </ChoiceBox>
-                               <Button mnemonicParsing="false" onAction="#openDatabase" text="Start Database Connection" />
-                     </children>
-                  </VBox>
-               </center>
+                    <center>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                            <Label text="Select Database:" textFill="WHITE"/>
+                            <ChoiceBox fx:id="databaseChoiceBox" prefHeight="25.0" prefWidth="241.0">
+                                <opaqueInsets>
+                                    <Insets/>
+                                </opaqueInsets>
+                            </ChoiceBox>
+                            <Button mnemonicParsing="false" onAction="#openDatabase" text="Start Database Connection"/>
+                        </VBox>
+                    </center>
                 </BorderPane>
             </Tab>
             <Tab text="Open Files">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <BorderPane prefHeight="200.0" prefWidth="200.0">
+                    <center>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                            <Label text="Select SCP Connection:" textFill="WHITE"/>
+                            <ChoiceBox fx:id="scpChoiceBox" prefHeight="25.0" prefWidth="241.0">
+                                <opaqueInsets>
+                                    <Insets/>
+                                </opaqueInsets>
+                            </ChoiceBox>
+                            <Button mnemonicParsing="false" onAction="#openScpScript" text="Open SCP Connection"/>
+                        </VBox>
+                    </center>
+                </BorderPane>
             </Tab>
             <Tab text="Upload Files">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
             </Tab>
         </TabPane>
     </center>
     <bottom>
         <BorderPane prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
             <left>
-                <Label fx:id="statusMsg" text="(C) 2017 Stefan Huber" textFill="WHITE" BorderPane.alignment="CENTER" />
+                <Label fx:id="statusMsg" text="(C) 2017 Stefan Huber" textFill="WHITE" BorderPane.alignment="CENTER"/>
             </left>
         </BorderPane>
     </bottom>

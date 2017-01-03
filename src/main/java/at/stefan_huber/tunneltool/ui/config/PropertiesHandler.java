@@ -18,6 +18,9 @@ public class PropertiesHandler {
 
     private static final String KEY_DATABASES = "databases";
     private static final String KEY_SQL_DEV_PATH = "sqldeveloperpath";
+
+    private static final String KEY_SCP_SCRIPTS = "scpscripts";
+
     private static final String FILE_NAME = "tunneltool.properties";
 
     private static PropertiesHandler INSTANCE;
@@ -26,12 +29,15 @@ public class PropertiesHandler {
     private Map<String, String> databases;
     private String sqlDeveloperPath;
 
+    private Map<String, String> scpScripts;
+
     private PropertiesHandler() {
         refreshProperties();
     }
 
     public void refreshProperties() {
         databases = new HashMap<>();
+        scpScripts = new HashMap<>();
         readPropertyFile();
     }
 
@@ -49,6 +55,7 @@ public class PropertiesHandler {
             }
 
             databases = MapHelper.parseMap(prop.getProperty(KEY_DATABASES));
+            scpScripts = MapHelper.parseMap(prop.getProperty(KEY_SCP_SCRIPTS));
             sqlDeveloperPath = prop.getProperty(KEY_SQL_DEV_PATH);
         }
         finally {
@@ -72,6 +79,8 @@ public class PropertiesHandler {
             output = new FileOutputStream(FILE_NAME);
 
             prop.setProperty(KEY_DATABASES, MapHelper.formatMap(databases));
+            prop.setProperty(KEY_SCP_SCRIPTS, MapHelper.formatMap(scpScripts));
+
             prop.setProperty(KEY_SQL_DEV_PATH, sqlDeveloperPath);
 
             // save properties to project root folder
@@ -110,11 +119,23 @@ public class PropertiesHandler {
         return databases.get(databaseName);
     }
 
+    public Map<String, String> getScpScriptsMap() {
+        return scpScripts;
+    }
+
+    public String getScpScript(String scpScriptName) {
+        return scpScripts.get(scpScriptName);
+    }
+
     public String getSqlDeveloperPath() {
         return sqlDeveloperPath;
     }
 
     public void setSqlDeveloperPath(String sqlDeveloperPath) {
         this.sqlDeveloperPath = sqlDeveloperPath;
+    }
+
+    public List<String> getScpScripts() {
+        return new ArrayList<>(scpScripts.keySet());
     }
 }
