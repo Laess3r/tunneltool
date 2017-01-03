@@ -1,6 +1,6 @@
 # ![][logo] Tunnel Tool
 
-Tunnel Tool is a small tool helping to access remote servers
+Tunnel Tool is a small tool helping to access remote servers. Features:
 
   - Open SSH Tunnels to various servers
   - Download Logfiles
@@ -13,15 +13,15 @@ Checkout the project and use
 $ mvn package
 ```
 
-## Script Settings
+## Settings
 Todo describe
-### Database Tunnel Scripts
+#### Database Tunnel Scripts
  Todo describe
  
-### SCP Tunnel Scripts
+#### SCP Tunnel Scripts
  Todo describe
  
-### Misc Settings
+#### Misc Settings
 Todo describe
 
 
