@@ -29,4 +29,38 @@
 
     </dependencies>
 
+    <build>
+        <!--EXE: mvn jfx:native (Target folder: target/jfx/app)-->
+        <!--JAR: mvn jfx:jar (Target folder: target/jfx/native-->
+        <plugins>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.7.0</version>
+                <configuration>
+                    <vendor>Stefan Huber</vendor>
+                    <mainClass>at.stefan_huber.tunneltool.ui.Main</mainClass>
+                    <copyAdditionalAppResourcesToJar>true</copyAdditionalAppResourcesToJar>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-jfxjar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-jar</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>create-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build-native</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

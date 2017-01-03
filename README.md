@@ -8,10 +8,11 @@ Tunnel Tool is a small tool helping to access remote servers. Features:
   - Upload Files to Servers
   
 ## Build and Run
-Checkout the project and use
+Checkout the project and use:
 ```sh
 $ mvn package
 ```
+Executable files will be created at /target/jfx/native
 
 ## Settings
 Todo describe
