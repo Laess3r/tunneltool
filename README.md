@@ -34,7 +34,10 @@ taskkill /IM plink.exe
  ```
  
 #### Misc Settings
-SQL Developer path, eg, "C:\sqldeveloper\sqldeveloper.exe"
+SQL Developer path, 
+```sh
+eg. "C:\sqldeveloper\sqldeveloper.exe"
+```
 
 Temp File Upload Script example:
 ```sh
