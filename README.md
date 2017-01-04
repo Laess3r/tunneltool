@@ -56,7 +56,7 @@ echo "cp /tmp/%FILENAME% /my/target/folder/%FILENAME% ; /bin/bash" | sudo /bin/s
 
 ___
 ##### Licenses
-   This software contains plink.exe ([PuTTY License]) and winscp.exe ([WinSCP License]). 
+   This software contains plink.exe ([PuTTY License]), putty.exe [PuTTY License]) and winscp.exe ([WinSCP License]). 
    All rights of these applications belong to their creators. 
    They are not covered by the license used by TunnelTool.
    
