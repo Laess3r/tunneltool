@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -18,8 +19,8 @@ public class DialogManager {
         show("Error Occurred", ex.getLocalizedMessage(), ex, Alert.AlertType.ERROR, true);
     }
 
-    public static void showInfo(String message) {
-        show(message, message, null, Alert.AlertType.INFORMATION, false);
+    public static Alert showInfo(String message) {
+        return show(message, message, null, Alert.AlertType.INFORMATION, false);
     }
 
     public static void showInfoAndBlock(String title, String message) {
@@ -38,9 +39,10 @@ public class DialogManager {
         show(header, content, ex, Alert.AlertType.ERROR, true);
     }
 
-    private static void show(String header, String content, Throwable ex, Alert.AlertType alertType, boolean block) {
+    private static Alert show(String header, String content, Throwable ex, Alert.AlertType alertType, boolean block) {
         Alert alert = new Alert(alertType);
         alert.setTitle(header);
+        alert.initModality(Modality.APPLICATION_MODAL);
         alert.setHeaderText(header);
         alert.setContentText(content);
 
@@ -76,6 +78,7 @@ public class DialogManager {
         }else{
             alert.show();
         }
+        return alert;
     }
 
 }

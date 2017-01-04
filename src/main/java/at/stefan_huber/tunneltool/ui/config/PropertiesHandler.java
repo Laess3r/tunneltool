@@ -21,6 +21,9 @@ public class PropertiesHandler {
 
     private static final String KEY_SCP_SCRIPTS = "scpscripts";
 
+    private static final String KEY_UPLOAD_SCRIPT = "uploadscript";
+    private static final String KEY_MOVEMENT_SCRIPT = "movementscript";
+
     private static final String FILE_NAME = "tunneltool.properties";
 
     private static PropertiesHandler INSTANCE;
@@ -28,8 +31,10 @@ public class PropertiesHandler {
     // contains: dbName and cmd Script
     private Map<String, String> databases;
     private String sqlDeveloperPath;
+    private String fileMovementScript;
 
     private Map<String, String> scpScripts;
+    private String fileUploadScript;
 
     private PropertiesHandler() {
         refreshProperties();
@@ -57,6 +62,8 @@ public class PropertiesHandler {
             databases = MapHelper.parseMap(prop.getProperty(KEY_DATABASES));
             scpScripts = MapHelper.parseMap(prop.getProperty(KEY_SCP_SCRIPTS));
             sqlDeveloperPath = prop.getProperty(KEY_SQL_DEV_PATH);
+            fileMovementScript = prop.getProperty(KEY_MOVEMENT_SCRIPT);
+            fileUploadScript = prop.getProperty(KEY_UPLOAD_SCRIPT);
         }
         finally {
             if (input != null) {
@@ -82,6 +89,8 @@ public class PropertiesHandler {
             prop.setProperty(KEY_SCP_SCRIPTS, MapHelper.formatMap(scpScripts));
 
             prop.setProperty(KEY_SQL_DEV_PATH, sqlDeveloperPath);
+            prop.setProperty(KEY_MOVEMENT_SCRIPT, fileMovementScript);
+            prop.setProperty(KEY_UPLOAD_SCRIPT, fileUploadScript);
 
             // save properties to project root folder
             prop.store(output, null);
@@ -137,5 +146,21 @@ public class PropertiesHandler {
 
     public List<String> getScpScripts() {
         return new ArrayList<>(scpScripts.keySet());
+    }
+
+    public String getFileUploadScript() {
+        return fileUploadScript;
+    }
+
+    public void setFileUploadScript(String fileUploadScript) {
+        this.fileUploadScript = fileUploadScript;
+    }
+
+    public String getFileMovementScript() {
+        return fileMovementScript;
+    }
+
+    public void setFileMovementScript(String fileMovementScript) {
+        this.fileMovementScript = fileMovementScript;
     }
 }

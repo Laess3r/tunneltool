@@ -20,17 +20,16 @@ import java.util.function.Consumer;
  */
 public class CmdExecutor {
 
-    private static final String[] APP_NAMES = new String[] { "winscp.exe", "plink.exe" };
+    private static final String[] APP_NAMES = new String[] { "winscp.exe", "plink.exe", "putty.exe" };
 
     /**
      * ASYNC execution of the given script
      */
-    static void executeCmd(Consumer<String> logging, String scriptToRun) {
+    static void executeCmd(Consumer<String> finishedConsumer, String scriptToRun) {
 
         new Thread(() -> {
             try {
-                asyncTask(logging, scriptToRun);
-
+                executeCmdSync(finishedConsumer, scriptToRun);
             }
             catch (Exception e) {
                 // ignore
@@ -39,7 +38,10 @@ public class CmdExecutor {
         }).start();
     }
 
-    private static void asyncTask(Consumer<String> logging, String scriptToRun) throws IOException {
+    public static void executeCmdSync(Consumer<String> logging, String scriptToRun) throws IOException {
+        if (scriptToRun == null) {
+            Platform.runLater(() -> logging.accept("NO SCRIPT FOUND in settings!"));
+        }
         long randomness = new Date().getTime();
         String tmpFileName = "tmp_" + randomness + ".cmd";
 

@@ -21,9 +21,11 @@ public class SettingsDialogController {
 
     private PropertiesHandler props;
     private Stage dialogStage;
-
     public TextField sqlDevPath;
 
+    public TextArea fileUploadScript;
+
+    public TextArea fileMovementScript;
     public TextField dbNameField;
     public TextArea dbScriptField;
     public ListView databaseSettingsList;
@@ -44,6 +46,10 @@ public class SettingsDialogController {
             databaseSettingsList.setItems(FXCollections.observableArrayList(props.getDatabases()));
             scpSettingsList.setItems(FXCollections.observableArrayList(props.getScpScripts()));
             sqlDevPath.setText(props.getSqlDeveloperPath());
+
+            fileMovementScript.setText(props.getFileMovementScript());
+
+            fileUploadScript.setText(props.getFileUploadScript());
 
             databaseSettingsList.getSelectionModel().selectFirst();
             scpSettingsList.getSelectionModel().selectFirst();
@@ -170,6 +176,9 @@ public class SettingsDialogController {
 
     public void saveSettings(ActionEvent actionEvent) {
         props.setSqlDeveloperPath(sqlDevPath.getText());
+        props.setFileMovementScript(fileMovementScript.getText());
+
+        props.setFileUploadScript(fileUploadScript.getText());
 
         updateDbEntry(null);
         updateScpEntry(null);
